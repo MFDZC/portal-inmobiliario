@@ -1,0 +1,20 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Propiedad {
+  id           Int      @id @default(autoincrement())
+  precio       Int
+  comuna       String
+  tipo         String   
+  habitaciones Int
+  banos        Int
+  metros       Int
+  imagen       String   @default("/uploads/default.jpg")
+  createdAt    DateTime @default(now())
+}
