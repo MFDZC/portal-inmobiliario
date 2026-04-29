@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { LibsqlDialect } from '@libsql/prisma-adapter';
+import { PrismaLibSQL } from '@prisma/adapter-libsql'; // <-- Cambio aquí
 import { createClient } from '@libsql/client';
 
 const libsql = createClient({
@@ -7,7 +7,7 @@ const libsql = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-const adapter = new LibsqlDialect(libsql);
+const adapter = new PrismaLibSQL(libsql); // <-- Cambio aquí
 const prisma = global.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma;
