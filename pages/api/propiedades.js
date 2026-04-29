@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { PrismaLibSQL } from '@prisma/adapter-libsql'; // <-- Cambio aquí
+import { PrismaLibSQL } from '@prisma/adapter-libsql'; // <-- Cambia esta línea
 import { createClient } from '@libsql/client';
 
 const libsql = createClient({
@@ -7,12 +7,14 @@ const libsql = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-const adapter = new PrismaLibSQL(libsql); // <-- Cambio aquí
+const adapter = new PrismaLibSQL(libsql); // <-- Y cambia esta línea
 const prisma = global.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma;
 
 export default async function handler(req, res) {
+  // ... el resto de tu código de GET y POST se queda igual
+}
   res.setHeader('Content-Type', 'application/json');
   try {
     if (req.method === 'GET') {
