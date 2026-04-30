@@ -1,17 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}", // Si usas la carpeta app
   ],
   theme: {
-    extend: {
-      colors: {
-        primario: '#1E3A8A',
-        acento: '#10B981',
-        fondo: '#F3F4F6',
-      },
-    },
+    extend: {},
   },
   plugins: [],
-};
+}
