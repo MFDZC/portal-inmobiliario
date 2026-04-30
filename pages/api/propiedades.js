@@ -5,7 +5,7 @@ import { createClient } from '@libsql/client';
 // 1. Configuración del cliente de base de datos Turso
 const libsql = createClient({
   url: process.env.DATABASE_URL || 'libsql://inmobiliaria-inmobiliaria.aws-us-east-1.turso.io',
-  authToken: process.env.TURSO_AUTH_TOKEN || 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3Nzc1NTg1MjIsImlkIjoiMDE5ZGRhYTEtOTIwMS03YWE3LThhNmYtOTE2YWQyYTExYjUyIiwicmlkIjoiMTgzYThhYzctZTQwZS00NGY5LTgyNmYtZDZmMzcwZGViOTU2In0.m1P2HDEHIex7QS6xzHJfUp0gOBQzdkVnM4TmbFa2fP-HRtfySCoNlJl7wxSFOMTpnNZgW_hXRuhGgcvtTjQuCA',
+  authToken: process.env.TURSO_AUTH_TOKEN || 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3Nzc1ODE0ODMsImlkIjoiMDE5ZGRhYTEtOTIwMS03YWE3LThhNmYtOTE2YWQyYTExYjUyIiwicmlkIjoiMTgzYThhYzctZTQwZS00NGY5LTgyNmYtZDZmMzcwZGViOTU2In0.fPqwQMgdYIy0RBztZ6LF4JYgX07urN-7H58tzn3hclFEexQcBHu9L8K-pcZTfYRLCXL370x09JKNkT_VBBiDAg',
 });
 
 // 2. Adaptador para que Prisma reconozca a Turso
