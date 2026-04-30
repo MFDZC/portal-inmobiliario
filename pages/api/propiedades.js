@@ -12,7 +12,6 @@ const libsql = createClient({
 const adapter = new PrismaLibSQL(libsql);
 
 // 3. Patrón Singleton para el cliente de Prisma
-// Esto evita agotar las conexiones en modo de desarrollo (Fast Refresh)
 const prisma = global.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma;
@@ -31,7 +30,6 @@ export default async function handler(req, res) {
   
   // Manejo del método POST: Crear una nueva propiedad
   if (req.method === 'POST') {
-    // Verificación básica de datos
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).json({ error: "El cuerpo de la solicitud está vacío." });
     }
@@ -47,6 +45,6 @@ export default async function handler(req, res) {
     }
   }
 
-  // Respuesta para métodos no soportados (ej. PUT, DELETE)
+  // Respuesta para métodos no soportados
   return res.status(405).json({ message: `Método ${req.method} no permitido` });
 }
