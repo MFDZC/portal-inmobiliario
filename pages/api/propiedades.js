@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { PrismaLibSQL } from '@prisma/adapter-libsql'; // <-- Cambia esta línea
+import { PrismaLibSQL } from '@prisma/adapter-libsql';
 import { createClient } from '@libsql/client';
 
 const libsql = createClient({
@@ -7,40 +7,33 @@ const libsql = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-const adapter = new PrismaLibSQL(libsql); // <-- Y cambia esta línea
+const adapter = new PrismaLibSQL(libsql);
 const prisma = global.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma;
 
 export default async function handler(req, res) {
-  // ... el resto de tu código de GET y POST se queda igual
-}
-  res.setHeader('Content-Type', 'application/json');
-  try {
-    if (req.method === 'GET') {
-      const { q } = req.query;
-      const propiedades = await prisma.propiedad.findMany({
-        where: q ? { comuna: { contains: q } } : {},
-        orderBy: { createdAt: 'desc' }
-      });
+  if (req.method === 'GET') {
+    try {
+      const propiedades = await prisma.propiedad.findMany();
       return res.status(200).json(propiedades);
+    } catch (error) {
+      console.error("Error en Turso GET:", error);
+      return res.status(500).json({ error: error.message });
     }
-
-    if (req.method === 'POST') {
-      const nueva = await prisma.propiedad.create({
-        data: {
-          precio: parseInt(req.body.precio),
-          comuna: req.body.comuna,
-          tipo: req.body.tipo,
-          habitaciones: parseInt(req.body.habitaciones),
-          banos: parseInt(req.body.banos),
-          metros: parseInt(req.body.metros),
-        }
+  } 
+  
+  if (req.method === 'POST') {
+    try {
+      const nuevaPropiedad = await prisma.propiedad.create({
+        data: req.body,
       });
-      return res.status(200).json(nueva);
+      return res.status(201).json(nuevaPropiedad);
+    } catch (error) {
+      console.error("Error en Turso POST:", error);
+      return res.status(500).json({ error: error.message });
     }
-  } catch (error) {
-    console.error("Error en Turso:", error);
-    return res.status(500).json({ error: error.message });
   }
+
+  return res.status(405).json({ message: 'Método no permitido' });
 }
