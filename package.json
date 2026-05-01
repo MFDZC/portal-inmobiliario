@@ -12,16 +12,16 @@
     "@libsql/client": "^0.17.3",
     "@prisma/adapter-libsql": "^7.8.0",
     "@prisma/client": "^7.8.0",
-    "next": "14.2.3",
+    "next": "^14.2.5",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "prisma": "^7.8.0",
-    "tailwindcss": "^3.4.1",
-    "postcss": "^8.4.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^8",
-    "eslint-config-next": "14.2.3"
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8.4.0",
+    "prisma": "^7.8.0",
+    "tailwindcss": "^3.4.1"
   }
 }
